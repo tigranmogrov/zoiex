@@ -22,7 +22,13 @@ export const usePostStore = defineStore('post', {
     };
   },
   getters: {
-    allPosts: (state): IPostData[] => state.posts
+    allPosts: (state): IPostData[] => state.posts,
+    totalPage: (state): number => Math.floor(state.pagination.totalCount / state.pagination.limit),
+    currentPage: (state): number => state.pagination.currentPage,
+    isLastPage(): boolean {
+      return this.currentPage >= this.totalPage;
+    },
+    isNotPosts: (state): boolean => state.isNotFoundPosts
   },
   actions: {
     async fetchPosts(searchString?: string, offset: number = 0): Promise<void> {
@@ -45,6 +51,30 @@ export const usePostStore = defineStore('post', {
       } finally {
         this.isLoading = false;
       }
+    },
+    async fetchLoadMorePosts(): Promise<void> {
+      try {
+        const {
+          data: { data }
+        }: { data: IPost } = await API.get('/search', {
+          params: {
+            q: this.searchText || DEFAULT_SEARCH_VALUE,
+            limit: this.pagination.limit,
+            offset: this.pagination.currentOffset
+          }
+        });
+        this.posts.push(...data);
+        this.increasePage();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    setSearchString(searchString: string) {
+      this.searchText = searchString.length ? searchString : DEFAULT_SEARCH_VALUE;
+    },
+    increasePage() {
+      this.pagination.currentPage += 1;
+      this.pagination.currentOffset += this.pagination.limit;
     }
   }
 });
