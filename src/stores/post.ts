@@ -52,6 +52,16 @@ export const usePostStore = defineStore('post', {
         this.isLoading = false;
       }
     },
+    async getPostById(id: string): Promise<void> {
+      try {
+        const {
+          data: { data }
+        }: { data: { data: IPostData } } = await API.get(`/${id}`);
+        this.currentPost = data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async fetchLoadMorePosts(): Promise<void> {
       try {
         const {
