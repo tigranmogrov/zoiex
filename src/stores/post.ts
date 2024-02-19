@@ -31,12 +31,16 @@ export const usePostStore = defineStore('post', {
     isNotPosts: (state): boolean => state.isNotFoundPosts
   },
   actions: {
-    async fetchPosts(searchString?: string, offset: number = 0): Promise<void> {
+    async fetchPosts(offset: number = 0): Promise<void> {
       try {
         const {
           data: { data, pagination }
         }: { data: IPost } = await API.get('/search', {
-          params: { q: searchString || DEFAULT_SEARCH_VALUE, limit: this.pagination.limit, offset }
+          params: {
+            q: this.searchText || DEFAULT_SEARCH_VALUE,
+            limit: this.pagination.limit,
+            offset
+          }
         });
         this.isNotFoundPosts = false;
         this.posts = data;
