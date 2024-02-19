@@ -11,8 +11,8 @@ withDefaults(defineProps<{ isSearchVisible?: boolean }>(), {
 const postStore = usePostStore();
 const searchText = ref(postStore.searchText || '');
 const fetchNewData = debounce(() => {
-  postStore.fetchPosts(searchText.value);
   postStore.setSearchString(searchText.value);
+  postStore.fetchPosts();
 }, 400);
 
 watch(searchText, () => {
