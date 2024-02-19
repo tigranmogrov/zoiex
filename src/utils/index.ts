@@ -11,3 +11,7 @@ export function debounce(func: Function, delay: number): Function {
     }, delay);
   };
 }
+
+export const randomNumber = (min: number, max: number): number => {
+  return Math.floor(min + Math.random() * (max + 1 - min));
+};
