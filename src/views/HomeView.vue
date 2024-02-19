@@ -4,8 +4,6 @@ import { storeToRefs } from 'pinia';
 
 const postStore = usePostStore();
 
-postStore.fetchPosts();
-
 const { isLoading, isNotPosts, allPosts } = storeToRefs(postStore);
 const shareGiphy = async (url: string, text: string) => {
   try {
