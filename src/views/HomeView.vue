@@ -3,6 +3,7 @@ import { usePostStore } from '@/stores/post';
 import { storeToRefs } from 'pinia';
 
 const postStore = usePostStore();
+
 postStore.fetchPosts();
 
 const { isLoading, isNotPosts, allPosts } = storeToRefs(postStore);
