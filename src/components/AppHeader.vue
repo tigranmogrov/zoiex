@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import LogoImg from '@/assets/logo.png';
-import { ref } from 'vue';
+import { usePostStore } from '@/stores/post';
+import { debounce } from '@/utils';
+import { ref, watch } from 'vue';
 
 withDefaults(defineProps<{ isSearchVisible?: boolean }>(), {
   isSearchVisible: true
 });
 
-const searchText = ref('');
+const postStore = usePostStore();
+const searchText = ref(postStore.searchText || '');
+const fetchNewData = debounce(() => {
+  postStore.fetchPosts(searchText.value);
+  postStore.setSearchString(searchText.value);
+}, 400);
+
+watch(searchText, () => {
+  fetchNewData();
+});
 </script>
 
 <template>
