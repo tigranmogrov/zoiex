@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      base: '/zoinex/',
+      base: '/zoiex/',
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       workbox: {
@@ -20,12 +20,12 @@ export default defineConfig({
         ]
       },
       manifest: {
-        name: 'Zoinex App',
-        short_name: 'Zoinex',
+        name: 'Zoiex App',
+        short_name: 'Zoiex',
         start_url: '.',
         display: 'fullscreen',
         background_color: '#fff',
-        description: 'Zoinex test project',
+        description: 'Zoiex test project',
         icons: [
           {
             src: 'img/icons/favicon-16x16.png',
@@ -51,7 +51,7 @@ export default defineConfig({
       }
     })
   ],
-  base: process.env.NODE_ENV === 'development' ? '/' : '/zoinex/',
+  base: process.env.NODE_ENV === 'development' ? '/' : '/zoiex/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
