@@ -116,3 +116,17 @@ export interface IPost {
   meta: IMeta;
   pagination: IPagination;
 }
+export interface IPostStore {
+  posts: IPostData[];
+  currentPost: IPostData | null;
+  trendingPosts: IPostData[];
+  searchText: string;
+  isNotFoundPosts: boolean;
+  isLoading: boolean;
+  pagination: {
+    limit: number;
+    currentPage: number;
+    totalCount: number;
+    currentOffset: number;
+  };
+}
