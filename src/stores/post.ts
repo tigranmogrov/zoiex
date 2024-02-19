@@ -62,6 +62,23 @@ export const usePostStore = defineStore('post', {
         console.error(error);
       }
     },
+    async getTrendingPosts(): Promise<void> {
+      try {
+        const {
+          data: { data }
+        }: { data: IPost } = await API.get(`/trending`, {
+          params: {
+            offset: randomNumber(0, 200),
+            rating: 'g',
+            bundle: 'messaging_non_clips',
+            limit: this.pagination.limit
+          }
+        });
+        this.trendingPosts = data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async fetchLoadMorePosts(): Promise<void> {
       try {
         const {
