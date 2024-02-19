@@ -101,7 +101,7 @@ export const usePostStore = defineStore('post', {
       }
     },
     setSearchString(searchString: string) {
-      this.searchText = searchString.length ? searchString : DEFAULT_SEARCH_VALUE;
+      this.searchText = searchString.length ? searchString : '';
     },
     increasePage() {
       this.pagination.currentPage += 1;
