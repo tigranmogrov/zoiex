@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import EmptyLayout from '@/layouts/EmptyLayout.vue';
-import { computed, reactive, ref, shallowRef } from 'vue';
-import { RouterView, useRouter } from 'vue-router';
+import { computed, reactive, shallowRef } from 'vue';
+import { RouterView, useRoute } from 'vue-router';
 
-const router = useRouter();
-
-const layoutName = ref('');
+const route = useRoute();
 
 const layouts = reactive<{ [key: string]: any }>({
   default: shallowRef(DefaultLayout),
   empty: shallowRef(EmptyLayout)
 });
 
-router.beforeEach((to) => {
-  to.meta.layout ? (layoutName.value = String(to.meta.layout)) : (layoutName.value = 'default');
-});
-const getLayout = computed(() => layouts[String(layoutName.value)]);
+const getLayout = computed(() => layouts[String(route.meta.layout)]);
 </script>
 
 <template>
