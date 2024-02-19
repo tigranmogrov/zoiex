@@ -16,7 +16,7 @@ export default defineConfig({
         globDirectory: 'dist/',
         swDest: 'dist/sw.js',
         globPatterns: [
-          '**/*.{js, css, html, png, jpg, jpeg, svg, woff2, woff, ttf, oet, ico, txt, vue}'
+          '**/*.{js, css, html, png, jpg, jpeg, svg, woff2, woff, ttf, oet, ico, txt }'
         ]
       },
       manifest: {
